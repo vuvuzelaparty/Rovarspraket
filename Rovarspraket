@@ -2,20 +2,43 @@
 
 import sys
 
-if len(sys.argv) != 2:
+def usage():
     print('Usage:')
-    print('    ./Rovarspraket "<input string>"')
+    print('    ./Rovarspraket [-d] "<input string>"')
+    print('    Add -d flag to decode message after encoding')
     print('Example:')
     print('    ./Rovarspraket "I\'m speaking Robber\'s language!"')
     sys.exit()
 
-text = sys.argv[1]
-out = ''
-noprint = 'aeiouAEIOU \'\!.'
+nodec = 'aeiouAEIOU- \'!.öåäÅÄÖ'
 
-for letter in text:
-    out += str(letter)
-    if letter not in noprint:
-        out += 'o'
+def encode(text):
+    out = ''
+    for letter in text:
         out += str(letter)
-print(out)
+        if letter not in nodec:
+            out += 'o' + str(letter).lower()
+    print(out)
+    return out
+
+def decode(text):
+    out = ''
+    i = 0
+    while i < len(text):
+        out += text[i]
+        if text[i] not in nodec:
+            i += 2
+        i += 1
+    print(out)
+
+if len(sys.argv) < 2 or len(sys.argv) > 3:
+    usage()
+if sys.argv[1] == "-d":
+    arg = sys.argv[2]
+    dec = encode(arg)
+    decode(dec)
+elif len(sys.argv) == 2:
+    arg = sys.argv[1]
+    encode(arg)
+else:
+    usage()
