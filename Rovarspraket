@@ -2,7 +2,7 @@
 
 import sys
 
-nodec = 'aeiouAEIOU- \'!.öåäÅÄÖ'
+nodec = 'aeiouyAEIOUY- \'!.öåäÅÄÖ'
 
 def usage():
     print('Usage:')
