@@ -2,22 +2,22 @@
 
 import sys
 
+nodec = 'aeiouAEIOU- \'!.öåäÅÄÖ'
+
 def usage():
     print('Usage:')
     print('    ./Rovarspraket [-d] "<input string>"')
-    print('    Add -d flag to decode message after encoding')
+    print('    Add -d flag to decode message')
     print('Example:')
     print('    ./Rovarspraket "I\'m speaking Robber\'s language!"')
     sys.exit()
 
-nodec = 'aeiouAEIOU- \'!.öåäÅÄÖ'
-
 def encode(text):
     out = ''
     for letter in text:
-        out += str(letter)
+        out += letter
         if letter not in nodec:
-            out += 'o' + str(letter).lower()
+            out += 'o' + letter.lower()
     print(out)
     return out
 
@@ -35,8 +35,7 @@ if len(sys.argv) < 2 or len(sys.argv) > 3:
     usage()
 if sys.argv[1] == "-d":
     arg = sys.argv[2]
-    dec = encode(arg)
-    decode(dec)
+    decode(arg)
 elif len(sys.argv) == 2:
     arg = sys.argv[1]
     encode(arg)
